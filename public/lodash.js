@@ -1479,7 +1479,7 @@
         /** Used to detect methods masquerading as native. */
         var maskSrcKey = (function() {
             var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-            return uid ? ('Symbol(src)_1.' + uid) : '';
+            return uid ? ('Symbol(dist)_1.' + uid) : '';
         }());
 
         /**
