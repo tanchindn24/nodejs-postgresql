@@ -7,9 +7,6 @@ const pool = require('../../dbConnection');
 const queries = require('../student/queries');
 const axios = require("axios");
 
-const host = process.env.HOST || 'localhost';
-const port = process.env.PORT || 80;
-
 const migrate = async (req, res) => {
     console.log('migrate');
     const text = `
@@ -169,7 +166,7 @@ const updateStudent = async (req, res) => {
 
 const indexView = (req, res) => {
     console.log('indexView')
-    axios.get(`http://${host}:${port}/api/students`)
+    axios.get(`/api/students`)
         .then((response) => {
             if (response.data.length > 0) {
                 const students = response.data;
