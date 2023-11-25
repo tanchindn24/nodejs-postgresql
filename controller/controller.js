@@ -3,8 +3,8 @@ require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
-const pool = require('../../dbConnection');
-const queries = require('../student/queries');
+const pool = require('../dbConnection');
+const queries = require('./queries');
 const axios = require("axios");
 
 const migrate = async (req, res) => {
@@ -186,6 +186,7 @@ const indexView = (req, res) => {
             }
         })
         .catch((err) => {
+            console.log(err)
             res.render('index', {
                 dataStudent: []
             })
