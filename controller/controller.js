@@ -156,34 +156,37 @@ const updateStudent = async (req, res) => {
         });
 }
 
-const indexView = (req, res) => {
-    axios.get(`nodejs-postgresql-kappa-peach.vercel.app/api/students`)
-        .then((response) => {
-            if (response.data.length > 0) {
-                const students = response.data;
-                const dobValue = students.map((student) => {
-                    return new Intl.DateTimeFormat('en-GB', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric'
-                    }).format(new Date(student.dob));
-                })
-                students.forEach((student, index) => {
-                    student.dob = dobValue[index];
-                })
-                res.render('index', {
-                    dataStudent: students
-                });
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-            res.render('log', {
-                logError: err,
-                host: `${req.hostname === "localhost" ? '' : req.hostname}/api/students`,
-                dataStudent: []
-            })
+const indexView = async (req, res) => {
+    try {
+        const response = await axios.get(`${req.hostname === "localhost" ? '' : req.hostname}/api/students`);
+
+        if (response.data.length > 0) {
+            const students = response.data;
+            const dobValue = students.map((student) => {
+                return new Intl.DateTimeFormat('en-GB', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                }).format(new Date(student.dob));
+            });
+
+            students.forEach((student, index) => {
+                student.dob = dobValue[index];
+            });
+
+            res.render('index', {
+                dataStudent: students
+            });
+        }
+    } catch (err) {
+        console.error(err);
+
+        res.render('log', {
+            logError: err,
+            host: `${req.hostname === "localhost" ? '' : req.hostname}/api/students`,
+            dataStudent: []
         });
+    }
 }
 
 const createStudentView = (req, res) => {
