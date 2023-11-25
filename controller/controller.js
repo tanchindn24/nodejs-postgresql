@@ -157,7 +157,7 @@ const updateStudent = async (req, res) => {
 }
 
 const indexView = (req, res) => {
-    axios.get(`${req.host === "localhost" ? '' : req.host}/api/students`)
+    axios.get(`${req.hostname === "localhost" ? '' : req.hostname}/api/students`)
         .then((response) => {
             if (response.data.length > 0) {
                 const students = response.data;
@@ -180,7 +180,7 @@ const indexView = (req, res) => {
             console.log(err)
             res.render('log', {
                 logError: err,
-                host: `${req.host === "localhost" ? '' : req.host}/api/students`,
+                host: `${req.hostname === "localhost" ? '' : req.hostname}/api/students`,
                 dataStudent: []
             })
         });
