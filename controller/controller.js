@@ -177,6 +177,7 @@ const indexView = (req, res) => {
             }
         })
         .catch((err) => {
+            console.log("loi")
             console.log(err)
             res.render('index', {
                 dataStudent: []
