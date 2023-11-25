@@ -157,7 +157,7 @@ const updateStudent = async (req, res) => {
 }
 
 const indexView = (req, res) => {
-    axios.get(`${req.hostname === "localhost" ? '' : req.hostname}/api/students`)
+    axios.get(`nodejs-postgresql-kappa-peach.vercel.app/api/students`)
         .then((response) => {
             if (response.data.length > 0) {
                 const students = response.data;
