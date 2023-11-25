@@ -13,6 +13,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 
 app.use('/', router);
+app.get('/test', (req, res) => {
+    res.json({message: 'Hello world'});
+});
 
 app.use((req, res) => {
     res.status(404).json({error: 'Not found'});
