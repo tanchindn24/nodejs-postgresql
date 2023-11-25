@@ -157,7 +157,7 @@ const updateStudent = async (req, res) => {
 }
 
 const indexView = (req, res) => {
-    axios.get('/api/students')
+    axios.get(`${req.host === "localhost" ? '' : req.host}/api/students`)
         .then((response) => {
             if (response.data.length > 0) {
                 const students = response.data;
