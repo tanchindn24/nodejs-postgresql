@@ -8,7 +8,6 @@ const queries = require('./queries');
 const axios = require("axios");
 
 const migrate = async (req, res) => {
-    console.log('migrate');
     const text = `
     DO $$ BEGIN
         IF NOT EXISTS (
@@ -36,7 +35,6 @@ const migrate = async (req, res) => {
 }
 
 const dbSeed = async (req, res) => {
-    console.log('seed');
     const text = `
     INSERT INTO students (name, email, age, dob)
     VALUES 
@@ -55,7 +53,6 @@ const dbSeed = async (req, res) => {
 }
 
 const deleteTable = async (req, res) => {
-    console.log('delete');
     const deleteText = `DELETE FROM students`;
     const migrateText = `
     DO $$ BEGIN
@@ -88,7 +85,6 @@ END $$;
 }
 
 const getStudents = async (req, res) => {
-    console.log('getStudents')
     try {
         await pool.query(queries.getStudents, (err, result) => {
             if (err) res.render('index', {'dataStudent': []});
@@ -101,7 +97,6 @@ const getStudents = async (req, res) => {
 }
 
 const getStudentById = async (req, res) => {
-    console.log('getStudentById')
     const id = parseInt(req.params.id);
     pool.query(queries.getStudentById, [id], (err, result) => {
         if (err) res.status(400).json({error: 'Student does not exist'});
@@ -110,7 +105,6 @@ const getStudentById = async (req, res) => {
 }
 
 const createStudent = async (req, res) => {
-    console.log('createStudent')
     const {name, email, age, dob} = req.body;
     pool.query(
         queries.checkEmailExists, [email], (err, result) => {
@@ -128,7 +122,6 @@ const createStudent = async (req, res) => {
 }
 
 const deleteStudent = async (req, res) => {
-    console.log('deleteStudent')
     const id = parseInt(req.params.id);
     pool.query(
         queries.getStudentById, [id], (err, result) => {
@@ -146,7 +139,6 @@ const deleteStudent = async (req, res) => {
 }
 
 const updateStudent = async (req, res) => {
-    console.log('updateStudent')
     const id = parseInt(req.params.id);
     const {name, email, age, dob} = req.body;
     pool.query(
@@ -165,7 +157,6 @@ const updateStudent = async (req, res) => {
 }
 
 const indexView = (req, res) => {
-    console.log('indexView')
     axios.get(`/api/students`)
         .then((response) => {
             if (response.data.length > 0) {
