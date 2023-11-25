@@ -16,7 +16,7 @@ router.put('/api/students/update/:id', controller.updateStudent);
 router.get('/api/students', controller.getStudents);
 
 // view
-router.get('/create-student', controller.createStudentView);
+//router.get('/create-student', controller.createStudentView);
 router.get('/', controller.indexView);
 
 module.exports = router
