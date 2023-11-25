@@ -18,7 +18,7 @@ router.get('/api/students', controller.getStudents);
 // view
 //router.get('/create-student', controller.createStudentView);
 router.get('/home', (req, res) => {
-    res.json({message: 'Hello world! Home'});
+    res.sendFile('home.html', { root: __dirname + '/views' })
 });
 
 module.exports = router

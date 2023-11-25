@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
     res.redirect('/home');
 });
 
+app.get('/test', (req, res) => {
+    res.render('home', {title: 'Test'})
+});
+
 app.use((req, res) => {
     res.status(404).json({error: 'Not found'});
 });
