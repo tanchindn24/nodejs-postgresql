@@ -17,6 +17,6 @@ router.get('/api/students', controller.getStudents);
 
 // view
 //router.get('/create-student', controller.createStudentView);
-router.get('/', controller.indexView);
+router.get('/home', controller.indexView);
 
 module.exports = router

@@ -13,8 +13,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 
 app.use('/', router);
-app.get('/test', (req, res) => {
-    res.json({message: 'Hello world'});
+
+app.get('/', (req, res) => {
+    res.redirect('/home');
 });
 
 app.use((req, res) => {
