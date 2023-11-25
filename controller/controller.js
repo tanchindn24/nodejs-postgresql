@@ -178,7 +178,8 @@ const indexView = (req, res) => {
         })
         .catch((err) => {
             console.log(err)
-            res.render('create', {
+            res.render('log', {
+                logError: err,
                 dataStudent: []
             })
         });
