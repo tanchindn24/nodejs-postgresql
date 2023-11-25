@@ -157,7 +157,7 @@ const updateStudent = async (req, res) => {
 }
 
 const indexView = (req, res) => {
-    axios.get(`/api/students`)
+    axios.get('/api/students')
         .then((response) => {
             if (response.data.length > 0) {
                 const students = response.data;
@@ -177,9 +177,8 @@ const indexView = (req, res) => {
             }
         })
         .catch((err) => {
-            console.log("loi")
             console.log(err)
-            res.render('index', {
+            res.render('create', {
                 dataStudent: []
             })
         });
