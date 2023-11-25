@@ -6,6 +6,7 @@ require("dotenv").config({
 const pool = require('../dbConnection');
 const queries = require('./queries');
 const axios = require("axios");
+const https = require("https");
 
 const migrate = async (req, res) => {
     const text = `
@@ -157,7 +158,7 @@ const updateStudent = async (req, res) => {
 }
 
 const indexView = async (req, res) => {
-    const host = `${req.hostname === "localhost" ? '' : req.hostname}/api/students`;
+    const host = `${req.hostname === "localhost" ? '' : "https://" + req.hostname}/api/students`;
     try {
         const response = await axios.get(host);
 
@@ -184,7 +185,7 @@ const indexView = async (req, res) => {
 
         res.render('log', {
             logError: err,
-            host: `${req.hostname === "localhost" ? '' : req.hostname}/api/students`,
+            host: host,
             dataStudent: []
         });
     }
