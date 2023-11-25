@@ -180,6 +180,7 @@ const indexView = (req, res) => {
             console.log(err)
             res.render('log', {
                 logError: err,
+                host: `${req.host === "localhost" ? '' : req.host}/api/students`,
                 dataStudent: []
             })
         });
