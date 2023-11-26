@@ -1,107 +1,110 @@
 <%- include('partials/header.ejs') %>
 <body>
-<div class="row mr-5 ml-5">
-    <div class="col-md-7">
-        <h1>LIST STUDENTS</h1>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>
-                <th scope="col">email</th>
-                <th scope="col">age</th>
-                <th scope="col">dob</th>
-                <th scope="col">action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% if (dataStudent.length === 0) { %>
+<div class="container-sm">
+    <div class="row mr-5 ml-5">
+        <div class="col-md-7">
+            <h1>LIST STUDENTS</h1>
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td colspan="6">No data</td>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">age</th>
+                    <th scope="col">dob</th>
+                    <th scope="col">action</th>
                 </tr>
-            <% } %>
-            <% dataStudent.forEach((student) => { %>
-                <tr>
-                    <th scope="row"><%= student.id %></th>
-                    <td><%= student.name %></td>
-                    <td><%= student.email %></td>
-                    <td><%= student.age %></td>
-                    <td><%= student.dob %></td>
-                    <td>
-                        <a class="btn btn-warning btn-sm"
-                           onclick="openEditModal('<%= student.id %>', '<%= student.name %>', '<%= student.email %>', <%= student.age %>, '<%= student.dob %>')">edit</a>
-                        <a href="#" class="btn btn-danger btn-sm"
-                           onclick="deleteStudent('<%= student.id %>')">delete</a>
-                    </td>
-                </tr>
-            <% }) %>
-            %>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-5">
-        <div class="container">
-            <h1>CREATE STUDENT</h1>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="name" name="name" class="form-control" placeholder="Enter name">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label>Age</label>
-                <input type="number" name="age" class="form-control" placeholder="18">
-            </div>
-            <div class="form-group">
-                <label>Dob</label>
-                <input type="date" name="dob" class="form-control" placeholder="18">
-            </div>
-            <div class="d-flex justify-content-end">
-                <button type="submit" value="submit" onclick="createStudent()" class="btn btn-primary">Submit</button>
+                </thead>
+                <tbody>
+                <% if (dataStudent.length === 0) { %>
+                    <tr>
+                        <td colspan="6">No data</td>
+                    </tr>
+                <% } %>
+                <% dataStudent.forEach((student) => { %>
+                    <tr>
+                        <th scope="row"><%= student.id %></th>
+                        <td><%= student.name %></td>
+                        <td><%= student.email %></td>
+                        <td><%= student.age %></td>
+                        <td><%= student.dob %></td>
+                        <td>
+                            <a class="btn btn-warning btn-sm"
+                               onclick="openEditModal('<%= student.id %>', '<%= student.name %>', '<%= student.email %>', <%= student.age %>, '<%= student.dob %>')">edit</a>
+                            <a href="#" class="btn btn-danger btn-sm"
+                               onclick="deleteStudent('<%= student.id %>')">delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+                %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <div class="container">
+                <h1>CREATE STUDENT</h1>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="name" name="name" class="form-control" placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" name="age" class="form-control" placeholder="18">
+                </div>
+                <div class="form-group">
+                    <label>Dob</label>
+                    <input type="date" name="dob" class="form-control" placeholder="18">
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" value="submit" onclick="createStudent()" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Student</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <input type="hidden" id="editStudentId" name="studentId">
-                        <div class="form-group">
-                            <label for="editName">Name</label>
-                            <input type="text" class="form-control" id="editName" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="editEmail">Email</label>
-                            <input type="email" class="form-control" id="editEmail" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="editAge">Age</label>
-                            <input type="number" class="form-control" id="editAge" name="age">
-                        </div>
-                        <div class="form-group">
-                            <label for="editDob">Date of Birth</label>
-                            <input type="date" class="form-control" id="editDob" name="dob">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
+        <!-- Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Student</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <input type="hidden" id="editStudentId" name="studentId">
+                            <div class="form-group">
+                                <label for="editName">Name</label>
+                                <input type="text" class="form-control" id="editName" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Email</label>
+                                <input type="email" class="form-control" id="editEmail" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="editAge">Age</label>
+                                <input type="number" class="form-control" id="editAge" name="age">
+                            </div>
+                            <div class="form-group">
+                                <label for="editDob">Date of Birth</label>
+                                <input type="date" class="form-control" id="editDob" name="dob">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     async function createStudent() {
         const name = document.querySelector('input[name="name"]').value;
